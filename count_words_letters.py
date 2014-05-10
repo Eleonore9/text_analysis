@@ -37,8 +37,9 @@ class count_words_letters:
         """
         my_text = open(text_file, 'r')
         letters_dict = {}
-        for line in my_text:
+        for line in my_text.read():
             for char in line:
+                char = char.lower()
                 if char != '' and char.isalpha():
                     if char not in letters_dict.keys():
                         #The first time a letter is added
@@ -59,7 +60,8 @@ class count_words_letters:
         """
         my_text = open(text_file, 'r')
         words_dict = {}
-        for word in my_text.split(" "):
+        for word in my_text.read().split(" "):
+            word = word.lower()
             if word != '' and word.isalpha():
                 if word not in words_dict:
                     #The first time a word is encountered
