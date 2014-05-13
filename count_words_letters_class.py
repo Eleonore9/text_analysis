@@ -88,7 +88,6 @@ class count_words_letters:
             print k, ': ', v
 
 
-
 if __name__ == "__main__":
     my_analysis = count_words_letters()
     print my_analysis.letters_freq('sample.txt')
