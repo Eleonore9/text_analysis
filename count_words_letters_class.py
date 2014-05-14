@@ -29,7 +29,7 @@ class count_words_letters:
                 new_string = new_string + char
         return new_string
 
-    def letters_freq(self, text_file):
+    def letters_count(self, text_file):
         """
         Returns a dictionary with all
         the letters present in the text
@@ -52,7 +52,7 @@ class count_words_letters:
         my_text.close()
         return letters_dict
 
-    def words_freq(self, text_file):
+    def words_count(self, text_file):
         """
         Returns a dictionary with all
         the words present in the text
@@ -75,19 +75,46 @@ class count_words_letters:
         my_text.close()
         return words_dict
 
-    def display_letters_freq(self, text):
+    def display_letters_count(self, text):
         text_string = remove_whitespace(self.remove_punctuation(text.read().lower()))
-        letters = self.letters_freq(text_string)
+        letters = self.letters_count(text_string)
         for k, v in sorted(letters.items()):
             print k, ': ', v
 
-    def display_words_freq(self, text):
+    def display_words_count(self, text):
         text_sample = self.remove_punctuation(text.read().lower().replace('\n', ''))
-        words =  self.words_freq(text_sample)
+        words =  self.words_count(text_sample)
         for k, v in sorted(words.items()):
             print k, ': ', v
+
+    def letters_freq(self, text_file):
+        """
+        Returns a dictionary with all
+        the letters and their percentage
+        """
+        nb_letters = self.letters_count(text_file)
+        total = sum(nb_letters.values())
+        print 'total: ', total
+        freq_letters = {}
+        for k, v in nb_letters.iteritems():
+            freq_letters[k] = round(v * 100. / total, 1) 
+        return freq_letters
+    
+    def words_freq(self, text_file):
+        """
+        Returns a dictionary with all
+        the words and their percentage
+        """
+        nb_words = self.words_count(text_file)
+        total = sum(nb_words.values())
+        print 'total: ', total
+        freq_words = {}
+        for k, v in nb_words.iteritems():
+            freq_words[k] = round(v * 100. / total, 1) 
+        return freq_words
 
 
 if __name__ == "__main__":
     my_analysis = count_words_letters()
-    print my_analysis.letters_freq('sample.txt')
+    print my_analysis.words_count('sample.txt')
+    print my_analysis.words_freq('sample.txt')
