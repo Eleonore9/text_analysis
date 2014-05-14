@@ -15,13 +15,10 @@ def list_for_plot_letters(input_txt_file):
     return dict_letters
 
 def plot_word_letters(dict_plot):
-    fig = plt.figure()
-    ax = plt.subplot(111)
-    ax.bar(dict_plot['letters'], dict_plot['count'], width=100)
+    print 'nb of letters: ', len(dict_plot['count'])
+    plt.hist(dict_plot['count'])
     return plt.show()
 
 if __name__ == "__main__":
-#count words and letters for two sample texts:
     data_plt = list_for_plot_letters('sample.txt')
     plot_word_letters(data_plt)
-    #print test.words_freq('sample.txt')
