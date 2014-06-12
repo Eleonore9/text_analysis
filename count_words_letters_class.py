@@ -94,7 +94,6 @@ class count_words_letters:
         """
         nb_letters = self.letters_count(text_file)
         total = sum(nb_letters.values())
-        print 'total: ', total
         freq_letters = {}
         for k, v in nb_letters.iteritems():
             freq_letters[k] = round(v * 100. / total, 1) 
@@ -107,7 +106,6 @@ class count_words_letters:
         """
         nb_words = self.words_count(text_file)
         total = sum(nb_words.values())
-        print 'total: ', total
         freq_words = {}
         for k, v in nb_words.iteritems():
             freq_words[k] = round(v * 100. / total, 1) 

@@ -16,11 +16,13 @@ def list_for_plot_letters(input_txt_file):
 
 def plot_word_letters(dict_plot):
     print 'nb of letters: ', len(dict_plot['count'])
-    plt.title("Letters content in a text (in %)")
-    plt.xlabel("Letters")
-    plt.ylabel("%")
-    plt.hist(dict_plot['count'], range(len(dict_plot['count'])))
-    return plt.show()
+    plt.plot(dict_plot.get('count'))
+    plt.show()
+    #plt.title("Letters content in a text (in %)")
+    #plt.xlabel("Letters")
+    #plt.ylabel("%")
+    #plt.hist(dict_plot['count'], range(len(dict_plot['count'])))
+    #return plt.show()
 
 if __name__ == "__main__":
     data_plt = list_for_plot_letters('sample.txt')
