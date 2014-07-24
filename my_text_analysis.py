@@ -3,7 +3,13 @@ import matplotlib.pyplot as plt
 
 CWL = cwl.count_words_letters()
 
-def list_for_plot_letters(input_txt_file):
+def dict_plot_letters(input_txt_file):
+    """
+    Returns a dict with a list of letters and their
+    corresponding frequencies. It is needed to plot
+    with Matplotlib. Matplotlib needs a list of 
+    values to plot. 
+    """
     letters = CWL.letters_freq(input_txt_file)
     dict_letters = {
             'letters': [],
