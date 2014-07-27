@@ -35,6 +35,7 @@ class count_words_letters:
         the letters present in the text
         and their frequency
         """
+        print 'TEXT: ', text_file
         my_text = open(text_file, 'r')
         letters_dict = {}
         for line in my_text.read():
@@ -50,6 +51,7 @@ class count_words_letters:
                         #encountered, its value is incremented
                         letters_dict[char] = letters_dict[char] + 1
         my_text.close()
+        print 'DICT COUNTS: ', letters_dict
         return letters_dict
 
     def words_count(self, text_file):

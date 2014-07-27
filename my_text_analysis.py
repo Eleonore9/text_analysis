@@ -11,13 +11,15 @@ def dict_plot_letters(input_txt_file):
     values to plot. 
     """
     letters = CWL.letters_freq(input_txt_file)
+    print '1st FREQ DICT: ', letters
     dict_letters = {
             'letters': [],
             'count': []
     }
-    for k, v in letters.iteritems():
+    for k, v in sorted(letters.iteritems()):
         dict_letters['count'].append(v)
         dict_letters['letters'].append(k)
+    print '2nd FREQ DICT: ', dict_letters
     return dict_letters
 
 def plot_word_letters(dict_plot):
@@ -31,5 +33,5 @@ def plot_word_letters(dict_plot):
     #return plt.show()
 
 if __name__ == "__main__":
-    data_plt = list_for_plot_letters('sample.txt')
-    plot_word_letters(data_plt)
+    #data_plt = dict_plot_letters('sample.txt')
+    dict_plot_letters('sample.txt')
