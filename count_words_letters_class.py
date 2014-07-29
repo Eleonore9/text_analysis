@@ -95,10 +95,8 @@ class count_words_letters:
             print k, ': ', v
 
     # Methods to retrieve words/letters frequencies in a text file.
-    # They return a dictionary containing two key/value pairs.
-    # One lists the letters/words, the other one the frequencies.
-    # It is useful to visualise the frequencies using Matplotlib 
-    # as it need a list of values as its input.
+    # They return a dictionary containing the letters/words and 
+    # their frequencies.
     def letters_freq(self, text_file):
         """
         Returns a dictionary with all
@@ -124,8 +122,30 @@ class count_words_letters:
             freq_words[k] = round(v * 100. / total, 1) 
         return freq_words
 
+    # Method to output the letters frequencies differently.
+    # It returns a dictionary containing two key/value pairs.
+    # One lists the letters/words, the other one the frequencies.
+    def dict_plot_letters(self, input_txt_file):
+        """
+        Returns a dict with a list of letters and their
+        corresponding frequencies. It is needed to plot
+        with Matplotlib. Matplotlib needs a list of 
+        values to plot. 
+        """
+        letters = self.letters_freq(input_txt_file)
+        print '1st FREQ DICT: ', letters
+        dict_letters = {
+                'letters': [],
+                'count': []
+        }
+        for k, v in sorted(letters.iteritems()):
+            dict_letters['count'].append(v)
+            dict_letters['letters'].append(k)
+        print '2nd FREQ DICT: ', dict_letters
+        return dict_letters
 
 if __name__ == "__main__":
     my_analysis = count_words_letters()
-    print my_analysis.words_count('sample.txt')
-    print my_analysis.words_freq('sample.txt')
+    #print my_analysis.words_count('sample.txt')
+    #print my_analysis.words_freq('sample.txt')
+    print my_analysis.dict_plot_letters('sample.txt')
