@@ -1,4 +1,5 @@
 import string
+import matplotlib.pyplot as plt
 
 class count_words_letters:
     '''Analyse the number of words and letters 
@@ -144,8 +145,23 @@ class count_words_letters:
         print '2nd FREQ DICT: ', dict_letters
         return dict_letters
 
+    def plot_word_letters(self, dict_plot):
+        """
+        Trying to plot the frequencies
+        with matplotlib.
+        """
+        print 'nb of letters: ', len(dict_plot['count'])
+        #plt.plot(dict_plot.get('count'))
+        #plt.show()
+        plt.title("Letters content in a text (in %)")
+        plt.xlabel("Letters")
+        plt.ylabel("%")
+        plt.hist(dict_plot['count'], range(len(dict_plot['count'])))
+        return plt.show()
+
 if __name__ == "__main__":
     my_analysis = count_words_letters()
     #print my_analysis.words_count('sample.txt')
     #print my_analysis.words_freq('sample.txt')
-    print my_analysis.dict_plot_letters('sample.txt')
+    dico = my_analysis.dict_plot_letters('sample.txt')
+    my_analysis.plot_word_letters(dico)
