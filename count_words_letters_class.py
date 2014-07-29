@@ -28,7 +28,10 @@ class count_words_letters:
             if char not in whitespace:
                 new_string = new_string + char
         return new_string
-
+    
+    # Methods to count words/letters in a text file
+    # Returns a dict with the letter/word as key and
+    # the count as value. Ex: {'a': 7, 'f': 3}
     def letters_count(self, text_file):
         """
         Returns a dictionary with all
@@ -77,6 +80,8 @@ class count_words_letters:
         my_text.close()
         return words_dict
 
+    # Methods to display the counts in a nice way.
+    # It prints out the letters/words with their count.
     def display_letters_count(self, text):
         text_string = remove_whitespace(self.remove_punctuation(text.read().lower()))
         letters = self.letters_count(text_string)
@@ -89,6 +94,11 @@ class count_words_letters:
         for k, v in sorted(words.items()):
             print k, ': ', v
 
+    # Methods to retrieve words/letters frequencies in a text file.
+    # They return a dictionary containing two key/value pairs.
+    # One lists the letters/words, the other one the frequencies.
+    # It is useful to visualise the frequencies using Matplotlib 
+    # as it need a list of values as its input.
     def letters_freq(self, text_file):
         """
         Returns a dictionary with all
