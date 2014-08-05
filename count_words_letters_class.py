@@ -5,6 +5,9 @@ class count_words_letters:
     '''Analyse the number of words and letters 
     in a text file '''
 
+    def __init__(self, text):
+        self.text = text
+
     punctuation = [punc for punc in string.punctuation]
     whitespace = [spc for spc in string.whitespace]
     
@@ -33,14 +36,14 @@ class count_words_letters:
     # Methods to count words/letters in a text file
     # Returns a dict with the letter/word as key and
     # the count as value. Ex: {'a': 7, 'f': 3}
-    def letters_count(self, text_file):
+    def letters_count(self, text):
         """
         Returns a dictionary with all
         the letters present in the text
         and their frequency
         """
-        print 'TEXT: ', text_file
-        my_text = open(text_file, 'r')
+        print 'TEXT: ', text
+        my_text = open(text, 'r')
         letters_dict = {}
         for line in my_text.read():
             for char in line:
@@ -58,13 +61,13 @@ class count_words_letters:
         print 'DICT COUNTS: ', letters_dict
         return letters_dict
 
-    def words_count(self, text_file):
+    def words_count(self, text):
         """
         Returns a dictionary with all
         the words present in the text
         and their frequency
         """
-        my_text = open(text_file, 'r')
+        my_text = open(text, 'r')
         words_dict = {}
         for word in my_text.read().split(" "):
             word = word.lower()
@@ -98,12 +101,12 @@ class count_words_letters:
     # Methods to retrieve words/letters frequencies in a text file.
     # They return a dictionary containing the letters/words and 
     # their frequencies.
-    def letters_freq(self, text_file):
+    def letters_freq(self, text):
         """
         Returns a dictionary with all
         the letters and their percentage
         """
-        nb_letters = self.letters_count(text_file)
+        nb_letters = self.letters_count(text)
         total = sum(nb_letters.values())
         print 'Total number of letters: ', total
         freq_letters = {}
@@ -111,12 +114,12 @@ class count_words_letters:
             freq_letters[k] = round(v * 100. / total, 1) 
         return freq_letters
     
-    def words_freq(self, text_file):
+    def words_freq(self, text):
         """
         Returns a dictionary with all
         the words and their percentage
         """
-        nb_words = self.words_count(text_file)
+        nb_words = self.words_count(text)
         total = sum(nb_words.values())
         freq_words = {}
         for k, v in nb_words.iteritems():
@@ -126,14 +129,14 @@ class count_words_letters:
     # Method to output the letters frequencies differently.
     # It returns a dictionary containing two key/value pairs.
     # One lists the letters/words, the other one the frequencies.
-    def dict_plot_letters(self, input_txt_file):
+    def dict_plot_letters(self, text):
         """
         Returns a dict with a list of letters and their
         corresponding frequencies. It is needed to plot
         with Matplotlib. Matplotlib needs a list of 
         values to plot. 
         """
-        letters = self.letters_freq(input_txt_file)
+        letters = self.letters_freq(text)
         print '1st FREQ DICT: ', letters
         dict_letters = {
                 'letters': [],
@@ -160,8 +163,8 @@ class count_words_letters:
         return plt.show()
 
 if __name__ == "__main__":
-    my_analysis = count_words_letters()
+    my_analysis = count_words_letters('sample.txt')
     #print my_analysis.words_count('sample.txt')
     #print my_analysis.words_freq('sample.txt')
-    dico = my_analysis.dict_plot_letters('sample.txt')
+    dico = my_analysis.dict_plot_letters(my_analysis.text)
     my_analysis.plot_word_letters(dico)
