@@ -4,14 +4,15 @@ import matplotlib.pyplot as plt
 class count_words_letters:
     '''Analyse the number of words and letters 
     in a text file '''
+    
+    punctuation = [punc for punc in string.punctuation]
+    whitespace = [spc for spc in string.whitespace]
+    letters_dict = {letter:0 for letter in string.ascii_lowercase}
+    print '*', letters_dict
 
     def __init__(self, text):
         self.text = text
 
-    punctuation = [punc for punc in string.punctuation]
-    whitespace = [spc for spc in string.whitespace]
-    letters_dict = {letter:0 for letter in string.ascii_lowercase}
-    
     def remove_punctuation(self, a_string):
         """
         Returns a string
@@ -38,6 +39,7 @@ class count_words_letters:
     # Returns a dict with the letter/word as key and
     # the count as value. Ex: {'a': 7, 'f': 3}
     def letters_count(self, text):
+        print '**', letters_dict
         """
         Returns a dictionary with all
         the letters present in the text
@@ -45,19 +47,20 @@ class count_words_letters:
         """
         print 'TEXT: ', text
         my_text = open(text, 'r')
-        letters_dict = {}
+        #letters_dict = {}
         for line in my_text.read():
             for char in line:
                 char = char.lower()
                 if char != '' and char.isalpha():
-                    if char not in letters_dict.keys():
+                    letters_dict[char] += 1
+                    #if char not in letters_dict.keys():
                         #The first time a letter is added
                         #as a key with a value 1
-                        letters_dict[char] = 1
-                    else:
+                        #letters_dict[char] = 1
+                    #else:
                         #Each time the same letter is
                         #encountered, its value is incremented
-                        letters_dict[char] = letters_dict[char] + 1
+                        #letters_dict[char] = letters_dict[char] + 1
         my_text.close()
         print 'DICT COUNTS: ', letters_dict
         return letters_dict
@@ -165,5 +168,6 @@ class count_words_letters:
 
 if __name__ == "__main__":
     my_analysis = count_words_letters('sample.txt')
-    dico = my_analysis.dict_plot_letters(my_analysis.text)
-    my_analysis.plot_word_letters(dico)
+    display_letters_count(my_analysis.text)
+    #dico = my_analysis.dict_plot_letters(my_analysis.text)
+    #my_analysis.plot_word_letters(dico)
