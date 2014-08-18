@@ -8,7 +8,7 @@ class count_words_letters:
     punctuation = [punc for punc in string.punctuation]
     whitespace = [spc for spc in string.whitespace]
     letters_dict = {letter:0 for letter in string.ascii_lowercase}
-    print '*', letters_dict
+    #print '*', letters_dict
 
     def __init__(self, text):
         self.text = text
@@ -168,6 +168,9 @@ class count_words_letters:
 
 if __name__ == "__main__":
     my_analysis = count_words_letters('sample.txt')
-    display_letters_count(my_analysis.text)
-    #dico = my_analysis.dict_plot_letters(my_analysis.text)
-    #my_analysis.plot_word_letters(dico)
+    text = open(my_analysis.text, 'r')
+    t = text.read()
+    print my_analysis.remove_whitespace(t)
+    #display_letters_count(my_analysis.text)
+    ##dico = my_analysis.dict_plot_letters(my_analysis.text)
+    ##my_analysis.plot_word_letters(dico)
