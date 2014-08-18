@@ -11,8 +11,7 @@ SciPy, Matplotlib and nltk.
 Progress:
 --------
 * Letters: basic use of NumPy and Matplotlib to plot letters frequencies in
-Alice in Wonderland. Currently improving "count_words_letters_class.py" so the
-notebook is broken but it used to display as follows:
+Alice in Wonderland. It currently displays as follows:
 ![plotting_letters_frequencies] (https://raw.github.com/Eleonore9/text_analysis/master/text_analysis.png)
 * Words: basic script for counts and frequencies. On hold until the part on 
 "Letter" is over.
