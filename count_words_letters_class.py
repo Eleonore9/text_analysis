@@ -152,6 +152,6 @@ class count_words_letters:
         return plt.show()
 
 if __name__ == "__main__":
-    my_analysis = count_words_letters('sample.txt')
+    my_analysis = count_words_letters('books/sample.txt')
     d = my_analysis.dict_plot_letters(my_analysis.text)
     my_analysis.plot_letters(d)

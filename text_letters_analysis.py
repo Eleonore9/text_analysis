@@ -27,5 +27,5 @@ class text_letters_analysis:
        return plt.show()
 
 if __name__ == '__main__':
-    my_analysis = text_letters_analysis('sample.txt')
+    my_analysis = text_letters_analysis('books/sample.txt')
     my_analysis.plot_letters_freq(my_analysis.text)
