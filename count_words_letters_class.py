@@ -5,13 +5,11 @@ class count_words_letters:
     '''Analyse the number of words and letters 
     in a text file '''
     
-    punctuation = [punc for punc in string.punctuation]
-    whitespace = [spc for spc in string.whitespace]
-    letters_dict = {letter:0 for letter in string.ascii_lowercase}
-    #print '*', letters_dict
-
     def __init__(self, text):
         self.text = text
+        self.punctuation = [punc for punc in string.punctuation]
+        self.whitespace = [spc for spc in string.whitespace]
+        self.letters_dict = {letter:0 for letter in string.ascii_lowercase}
 
     def remove_punctuation(self, a_string):
         """
@@ -20,7 +18,7 @@ class count_words_letters:
         """
         new_string = ''
         for char in a_string:
-            if char not in punctuation:
+            if char not in self.punctuation:
                 new_string = new_string + char
         return new_string
 
@@ -31,7 +29,7 @@ class count_words_letters:
         """
         new_string = ''
         for char in a_string:
-            if char not in whitespace:
+            if char not in self.whitespace:
                 new_string = new_string + char
         return new_string
     
@@ -39,7 +37,7 @@ class count_words_letters:
     # Returns a dict with the letter/word as key and
     # the count as value. Ex: {'a': 7, 'f': 3}
     def letters_count(self, text):
-        print '**', letters_dict
+        print '**', self.letters_dict
         """
         Returns a dictionary with all
         the letters present in the text
@@ -52,7 +50,7 @@ class count_words_letters:
             for char in line:
                 char = char.lower()
                 if char != '' and char.isalpha():
-                    letters_dict[char] += 1
+                    self.letters_dict[char] += 1
                     #if char not in letters_dict.keys():
                         #The first time a letter is added
                         #as a key with a value 1
@@ -62,8 +60,8 @@ class count_words_letters:
                         #encountered, its value is incremented
                         #letters_dict[char] = letters_dict[char] + 1
         my_text.close()
-        print 'DICT COUNTS: ', letters_dict
-        return letters_dict
+        print 'DICT COUNTS: ', self.letters_dict
+        return self.letters_dict
 
     def words_count(self, text):
         """
@@ -91,14 +89,15 @@ class count_words_letters:
     # Methods to display the counts in a nice way.
     # It prints out the letters/words with their count.
     def display_letters_count(self, text):
-        text_string = remove_whitespace(self.remove_punctuation(text.read().lower()))
-        letters = self.letters_count(text_string)
+        #text = open(text, 'r')
+        #text_string = self.remove_whitespace(self.remove_punctuation(text.read().lower()))
+        letters = self.letters_count(text)
         for k, v in sorted(letters.items()):
             print k, ': ', v
 
     def display_words_count(self, text):
-        text_sample = self.remove_punctuation(text.read().lower().replace('\n', ''))
-        words =  self.words_count(text_sample)
+        #text_sample = self.remove_punctuation(text.read().lower().replace('\n', ''))
+        words =  self.words_count(text)
         for k, v in sorted(words.items()):
             print k, ': ', v
 
@@ -168,9 +167,6 @@ class count_words_letters:
 
 if __name__ == "__main__":
     my_analysis = count_words_letters('sample.txt')
-    text = open(my_analysis.text, 'r')
-    t = text.read()
-    print my_analysis.remove_whitespace(t)
-    #display_letters_count(my_analysis.text)
+    my_analysis.display_letters_count(my_analysis.text)
     ##dico = my_analysis.dict_plot_letters(my_analysis.text)
     ##my_analysis.plot_word_letters(dico)
