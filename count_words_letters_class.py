@@ -37,28 +37,17 @@ class count_words_letters:
     # Returns a dict with the letter/word as key and
     # the count as value. Ex: {'a': 7, 'f': 3}
     def letters_count(self, text):
-        print '**', self.letters_dict
         """
         Returns a dictionary with all
         the letters present in the text
         and their frequency
         """
-        print 'TEXT: ', text
         my_text = open(text, 'r')
-        #letters_dict = {}
         for line in my_text.read():
             for char in line:
                 char = char.lower()
                 if char != '' and char.isalpha():
                     self.letters_dict[char] += 1
-                    #if char not in letters_dict.keys():
-                        #The first time a letter is added
-                        #as a key with a value 1
-                        #letters_dict[char] = 1
-                    #else:
-                        #Each time the same letter is
-                        #encountered, its value is incremented
-                        #letters_dict[char] = letters_dict[char] + 1
         my_text.close()
         print 'DICT COUNTS: ', self.letters_dict
         return self.letters_dict
@@ -89,14 +78,11 @@ class count_words_letters:
     # Methods to display the counts in a nice way.
     # It prints out the letters/words with their count.
     def display_letters_count(self, text):
-        #text = open(text, 'r')
-        #text_string = self.remove_whitespace(self.remove_punctuation(text.read().lower()))
         letters = self.letters_count(text)
         for k, v in sorted(letters.items()):
             print k, ': ', v
 
     def display_words_count(self, text):
-        #text_sample = self.remove_punctuation(text.read().lower().replace('\n', ''))
         words =  self.words_count(text)
         for k, v in sorted(words.items()):
             print k, ': ', v
@@ -151,7 +137,7 @@ class count_words_letters:
         print '2nd FREQ DICT: ', dict_letters
         return dict_letters
 
-    def plot_word_letters(self, dict_plot):
+    def plot_letters(self, dict_plot):
         """
         Trying to plot the frequencies
         with matplotlib.
@@ -167,6 +153,7 @@ class count_words_letters:
 
 if __name__ == "__main__":
     my_analysis = count_words_letters('sample.txt')
-    my_analysis.display_letters_count(my_analysis.text)
+    d = my_analysis.dict_plot_letters(my_analysis.text)
+    my_analysis.plot_letters(d)
     ##dico = my_analysis.dict_plot_letters(my_analysis.text)
     ##my_analysis.plot_word_letters(dico)
