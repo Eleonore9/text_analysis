@@ -44,10 +44,15 @@ class count_words_letters:
         """
         my_text = open(text, 'r')
         intro = True
-        for line in my_text.read():
-            while intro:
+        while intro:
+            for line in my_text:
+                print intro, ' - ', line
                 if "***" in line:
+                    print '8-)'
                     intro = False
+        for line in my_text:
+            print '**', intro, ' - ', line
+            print '**', line
             for char in line:
                 char = char.lower()
                 if char != '' and char.isalpha():
@@ -156,6 +161,6 @@ class count_words_letters:
         return plt.show()
 
 if __name__ == "__main__":
-    my_analysis = count_words_letters('books/alice.txt')
+    my_analysis = count_words_letters('books/test.txt')
     d = my_analysis.dict_plot_letters(my_analysis.text)
     my_analysis.plot_letters(d)
