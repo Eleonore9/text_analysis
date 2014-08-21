@@ -44,19 +44,19 @@ class count_words_letters:
         """
         my_text = open(text, 'r')
         intro = True
-        while intro:
-            for line in my_text:
+        for line in my_text:
+            if intro:
                 print intro, ' - ', line
                 if "***" in line:
                     print '8-)'
                     intro = False
-        for line in my_text:
-            print '**', intro, ' - ', line
-            print '**', line
-            for char in line:
-                char = char.lower()
-                if char != '' and char.isalpha():
-                    self.letters_dict[char] += 1
+            else:
+                print '**', intro, ' - ', line
+                print '**', line
+                for char in line:
+                    char = char.lower()
+                    if char != '' and char.isalpha():
+                        self.letters_dict[char] += 1
         my_text.close()
         print 'DICT COUNTS: ', self.letters_dict
         return self.letters_dict
