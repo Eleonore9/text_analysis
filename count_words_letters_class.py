@@ -163,4 +163,4 @@ class count_words_letters:
 if __name__ == "__main__":
     my_analysis = count_words_letters('books/test.txt')
     d = my_analysis.dict_plot_letters(my_analysis.text)
-    my_analysis.plot_letters(d)
+    #my_analysis.plot_letters(d)

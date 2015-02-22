@@ -1,0 +1,8 @@
+python-dateutil>=2.4.0
+
+matplotlib>=1.4.2
+mpltools>=0.1
+
+numpy
+
+ipython[all]
