@@ -1,4 +1,5 @@
 import string
+import re
 
 class clean_text:
     '''Deal with metadata for books
@@ -21,7 +22,14 @@ class clean_text:
         the top of the text file'''
         text_file = open(text, 'r')
         meta =  text_file.read(265)
-        print meta, type(meta)
+        #print meta
+        title, author, language = "", "", ""
+        t = re.search("Title: [A-Za-z'\t' .]+", meta)
+        a = re.search("Author: [A-Za-z'\t' .]+", meta)
+        l = re.search("Language: [A-Za-z'\t' .]+", meta)
+        print t.group(0)
+        print a.group(0)
+        print l.group(0)
         text_file.close()
 
         ## Helpers to actually clean the whole text:
