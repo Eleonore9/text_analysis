@@ -3,7 +3,7 @@ import re
 
 class clean_text:
     '''Deal with metadata for books
-    from Gutengerb project. Clean the
+    from Gutenberg project. Clean the
     text'''
 
     def __init__(self, text):
@@ -13,16 +13,11 @@ class clean_text:
         self.metadata = {}
 
         ## Helper to take care of the metadata:
-        ## I want to be able to:
-        ## 1- Open the file
-        ## 2- Read the first 15 lines
-        ## 3- Build a dictionary with Title, Author and Language.
     def store_metadata(self, text):
         ''' Build a dictionary with metadata from
         the top of the text file'''
         text_file = open(text, 'r')
         meta =  text_file.read(265)
-        #print meta
         title, author, language = "", "", ""
         try:
             t = re.search("Title: [A-Za-z'\t' .]+", meta)
@@ -40,9 +35,13 @@ class clean_text:
         return metadata
 
         ## Helpers to actually clean the whole text:
-        ##First remove the the matadata
-    def remove_metadata(self, a_string):
-        pass
+        ##First remove the the metadata
+    def remove_metadata(self, text):
+        text_file = open(text, 'r')
+        text_file.read(265)
+        clean_text = text_file.read().strip()
+        text_file.close()
+        return clean_text
         
     def remove_punctuation_from_str(self, a_string):
         """Returns a string without 
@@ -66,4 +65,5 @@ class clean_text:
 
 if __name__ == "__main__":
     clean_test = clean_text('books/test.txt')
-    print clean_test.store_metadata(clean_test.text)
+    #clean_test.store_metadata(clean_test.text)
+    print clean_test.remove_metadata(clean_test.text)
