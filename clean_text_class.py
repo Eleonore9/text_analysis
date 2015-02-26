@@ -24,13 +24,20 @@ class clean_text:
         meta =  text_file.read(265)
         #print meta
         title, author, language = "", "", ""
-        t = re.search("Title: [A-Za-z'\t' .]+", meta)
-        a = re.search("Author: [A-Za-z'\t' .]+", meta)
-        l = re.search("Language: [A-Za-z'\t' .]+", meta)
-        print t.group(0)
-        print a.group(0)
-        print l.group(0)
+        try:
+            t = re.search("Title: [A-Za-z'\t' .]+", meta)
+            a = re.search("Author: [A-Za-z'\t' .]+", meta)
+            l = re.search("Language: [A-Za-z'\t' .]+", meta)
+            title += t.group(0)
+            author += a.group(0)
+            language += l.group(0)
+        except:
+            pass
+        metadata = {"title": title.replace("Title: ", ""),
+                    "author": author.replace("Author: ", ""),
+                    "language": language.replace("Language: ", "")}
         text_file.close()
+        return metadata
 
         ## Helpers to actually clean the whole text:
         ##First remove the the matadata
@@ -59,4 +66,4 @@ class clean_text:
 
 if __name__ == "__main__":
     clean_test = clean_text('books/test.txt')
-    clean_test.store_metadata(clean_test.text)
+    print clean_test.store_metadata(clean_test.text)
