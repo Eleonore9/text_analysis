@@ -8,8 +8,6 @@ class clean_text:
 
     def __init__(self, text):
         self.text = text
-        self.punctuation = [punc for punc in string.punctuation]
-        self.whitespace = [spc for spc in string.whitespace]
         self.metadata = {}
 
         ## Helper to take care of the metadata:
@@ -39,31 +37,20 @@ class clean_text:
     def remove_metadata(self, text):
         text_file = open(text, 'r')
         text_file.read(265)
-        clean_text = text_file.read().strip()
+        clean_text = text_file.read().strip().lower()
         text_file.close()
         return clean_text
         
-    def remove_punctuation_from_str(self, a_string):
+    def remove_punctuation(self, text_str):
         """Returns a string without 
         punctuation"""
-        new_string = ''
-        for char in a_string:
-            if char not in self.punctuation:
-                new_string = new_string + char
-        return new_string
-
-    def remove_whitespace_from_str(self, a_string):
-        """Returns a string
-        without whitespace"""
-        new_string = ''
-        for char in a_string:
-            if char not in self.whitespace:
-                new_string = new_string + char
-        return new_string
-
+        punc = re.compile("[,\.\(\)-_\*:]")
+        clean_text = punc.sub("", text_str)
+        return clean_text
 
 
 if __name__ == "__main__":
     clean_test = clean_text('books/test.txt')
     #clean_test.store_metadata(clean_test.text)
-    print clean_test.remove_metadata(clean_test.text)
+    no_meta = clean_test.remove_metadata(clean_test.text)
+    print clean_test.remove_punctuation(no_meta)
