@@ -38,6 +38,7 @@ class clean_text:
         text_file = open(text, 'r')
         text_file.read(265)
         clean_text = text_file.read().strip().lower()
+        #print clean_text
         text_file.close()
         return clean_text
         
@@ -48,9 +49,18 @@ class clean_text:
         clean_text = punc.sub("", text_str)
         return clean_text
 
+    # Add a function to return a list of words
+    def text_words(self, text_cleaned):
+        list_words = text_cleaned.split()
+        return list_words
+    
+    # Add a function to return a string of letters
+    def text_letters(self, text_cleaned):
+        pass
 
 if __name__ == "__main__":
-    clean_test = clean_text('books/test.txt')
-    #clean_test.store_metadata(clean_test.text)
-    no_meta = clean_test.remove_metadata(clean_test.text)
-    print clean_test.remove_punctuation(no_meta)
+    test = clean_text('books/test.txt')
+    no_meta = test.remove_metadata(test.text)
+    print no_meta
+    cleaned = test.remove_punctuation(no_meta)
+    print test.text_words(cleaned)
