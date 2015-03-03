@@ -1,87 +1,38 @@
 import string
 import matplotlib.pyplot as plt
+import clean_text_class as ct
 
 class count_words_letters:
     '''Analyse the number of words and letters 
     in a text file '''
     
-    def __init__(self, text):
-        self.text = text
-        self.punctuation = [punc for punc in string.punctuation]
-        self.whitespace = [spc for spc in string.whitespace]
-        self.letters_dict = {letter:0 for letter in string.ascii_lowercase}
-
-    def remove_punctuation(self, a_string):
-        """
-        Returns a string
-        without punctuation
-        """
-        new_string = ''
-        for char in a_string:
-            if char not in self.punctuation:
-                new_string = new_string + char
-        return new_string
-
-    def remove_whitespace(self, a_string):
-        """
-        Returns a string
-        without whitespace
-        """
-        new_string = ''
-        for char in a_string:
-            if char not in self.whitespace:
-                new_string = new_string + char
-        return new_string
+    alphabet = [l for l in string.ascii_lowercase]
     
+    def __init__(self, words, letters):
+        self.words = words
+        self.letters = letters
+
     # Methods to count words/letters in a text file
     # Returns a dict with the letter/word as key and
     # the count as value. Ex: {'a': 7, 'f': 3}
-    def letters_count(self, text):
+    def letters_count(self, letters):
         """
         Returns a dictionary with all
         the letters present in the text
         and their frequency
         """
-        my_text = open(text, 'r')
-        intro = True
-        for line in my_text:
-            if intro:
-                print intro, ' - ', line
-                if "***" in line:
-                    print '8-)'
-                    intro = False
-            else:
-                print '**', intro, ' - ', line
-                print '**', line
-                for char in line:
-                    char = char.lower()
-                    if char != '' and char.isalpha():
-                        self.letters_dict[char] += 1
-        my_text.close()
-        print 'DICT COUNTS: ', self.letters_dict
-        return self.letters_dict
+        l = sorted(letters)
+        letters_dict = {a:l.count(a) for a in alphabet}
+        return letters_dict
 
-    def words_count(self, text):
+    def words_count(self, words):
         """
         Returns a dictionary with all
         the words present in the text
         and their frequency
         """
-        my_text = open(text, 'r')
-        words_dict = {}
-        for word in my_text.read().split(" "):
-            word = word.lower()
-            if word != '' and word.isalpha():
-                if word not in words_dict:
-                    #The first time a word is encountered
-                    #it is added as a key with a value of 1
-                    words_dict[word] = 1
-                else:
-                    #Each time the same word is encountered
-                    #again, the corresponding value is 
-                    #incremented by 1
-                    words_dict[word] = words_dict[word] + 1
-        my_text.close()
+        l = sorted(words)
+        words_dict = {w:l.count(w) for w in l}
         return words_dict
 
     # Methods to display the counts in a nice way.
@@ -161,6 +112,11 @@ class count_words_letters:
         return plt.show()
 
 if __name__ == "__main__":
-    my_analysis = count_words_letters('books/test.txt')
-    d = my_analysis.dict_plot_letters(my_analysis.text)
+    test = ct.clean_text('books/test2.txt')
+    my_text = test.remove_punctuation(test.remove_chapters(test.remove_metadata(test.text)))
+    my_words = test.whole_text_words(my_text)
+    my_letters = test.text_letters(my_text)
+    cwl = count_words_letters(my_words, my_letters)
+    print cwl.words_count(cwl.words)
+    #d = my_analysis.dict_plot_letters(my_analysis.text)
     #my_analysis.plot_letters(d)

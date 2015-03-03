@@ -8,7 +8,6 @@ class clean_text:
 
     def __init__(self, text):
         self.text = text
-        self.metadata = {}
 
         ## Helper to take care of the metadata:
     def store_metadata(self, text):
