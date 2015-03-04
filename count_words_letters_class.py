@@ -64,12 +64,10 @@ class analyse_letters:
         """
         #d = sorted(dict_freq.iteritems())
         letters, freqs = tuple(x[0] for x in d), tuple(x[1] for x in d)
-        print list(freqs)
         plt.title("Letters content (in %)")
         plt.xlabel("Letters")
-        plt.ylabel("%")
+        plt.ylabel("Percent")
         plt.plot(range(1, len(freqs) + 1), list(freqs))
-        plt.axis([1, 26, 0.0, 12.0])
         plt.grid(True)
         return plt.show()
 
@@ -80,8 +78,8 @@ if __name__ == "__main__":
     my_words = test.whole_text_words(my_text)
     my_letters = test.text_letters(my_text)
     cw = analyse_words(my_words)
-    print cw.words_count(cw.words)
+    #print cw.words_count(cw.words)
     cl = analyse_letters(my_letters)
     l_freq = cl.letters_freq(cl.letters_count(cl.letters))
     print l_freq
-    #cwl.plot_letters(l_freq)
+    cl.plot_letters(l_freq)
