@@ -1,6 +1,7 @@
 import string
 import matplotlib.pyplot as plt
 import clean_text_class as ct
+import numpy as np
 
 class analyse_words:
     '''Analyse the words 
@@ -64,10 +65,19 @@ class analyse_letters:
         """
         #d = sorted(dict_freq.iteritems())
         letters, freqs = tuple(x[0] for x in d), tuple(x[1] for x in d)
+
+        ind = np.arange(len(letters))
+        width = 0.75
+        x_width = ind + width
+        
+        plt.bar(x_width, freqs, width)
         plt.title("Letters content (in %)")
         plt.xlabel("Letters")
         plt.ylabel("Percent")
-        plt.plot(range(1, len(freqs) + 1), list(freqs))
+        ticks_pos = [i + 1.1 for i in range(len(letters))]
+        plt.xticks(ticks_pos, letters)
+        plt.axis([0, len(letters) + 1, 0, round(max(freqs)) + 1])
+        #plt.plot(range(1, len(freqs) + 1), list(freqs))
         plt.grid(True)
         return plt.show()
 
