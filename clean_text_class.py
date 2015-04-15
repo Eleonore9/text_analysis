@@ -43,7 +43,7 @@ class clean_text:
     ## List all chapters present:
     def get_all_chapters(self, text):
         ''' Returns a list of all chapters in a book.'''
-        chapters = re.compile("chapter \w+.")
+        chapters = re.findall(r"chapter \w+", text)
         return chapters
 
     ## Get one chapter from a text
@@ -77,12 +77,12 @@ class clean_text:
 
 
 if __name__ == "__main__":
-    test = clean_text('books/test2.txt')
+    test = clean_text('books/alice.txt')
     #print test.get_metadata(test.text)
     no_meta = test.remove_metadata(test.text)
     #print no_meta
-    #print test.get_all_chapters(no_meta)
-    print test.remove_chapters(no_meta)
+    print test.get_all_chapters(no_meta)
+    #print test.remove_chapters(no_meta)
     #print test.remove_punctuation(no_meta)
     #print test.whole_text_words(cleaned)
     #print test.text_letters(cleaned)
