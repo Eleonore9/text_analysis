@@ -9,8 +9,8 @@ class clean_text:
     def __init__(self, text):
         self.text = text
 
-        ## Helper to take care of the metadata:
-    def store_metadata(self, text):
+    ## Helper to take care of the metadata:
+    def get_metadata(self, text):
         ''' Build a dictionary with metadata from
         the top of the text file'''
         with open(text, 'r') as text_file:
@@ -30,8 +30,8 @@ class clean_text:
                         "language": language.replace("Language: ", "")}
         return metadata
 
-        ## Helpers to actually clean the whole text:
-        ##First remove the the metadata
+    ## Helpers to actually clean the whole text:
+    ## Remove the the metadata:
     def remove_metadata(self, text):
         ''' Returns the text as a string
         without the metadata at the top.'''
@@ -39,19 +39,30 @@ class clean_text:
             text_file.read(683)
             clean_text = text_file.read().strip().lower()
         return clean_text
-        
+
+    ## List all chapters present:
+    def get_all_chapters(self, text):
+        ''' Returns a list of all chapters in a book.'''
+        chapters = re.compile("chapter \w+.")
+        return chapters
+
+    ## Get one chapter from a text
+    def get_chapter(self, text, chapter):
+        ''' Returns the text for a chapter specified.'''
+        pass
+    
+    ## Remove "Chapter x":    
     def remove_chapters(self, text_str):
         ''' Returns the whole text as a string
         without "Chapter x".'''
-        chapters = re.compile("chapter \w+.")
-        clean_text = chapters.sub("", text_str)
+        clean_text = re.sub(r"chapter \w+.", "", text_str)
         return clean_text
 
+    ## Get rid of the punctuation:
     def remove_punctuation(self, text_str):
         """Returns a string without 
         punctuation"""
-        punc = re.compile("[,\.\(\)_\*:?!']")
-        clean_text = punc.sub("", text_str)
+        clean_text = re.sub(r"[,\.\(\)_\*:?!']", "", text_str)
         return clean_text
 
     # Add a function to return a list of words
@@ -67,10 +78,11 @@ class clean_text:
 
 if __name__ == "__main__":
     test = clean_text('books/test2.txt')
-    #print test.store_metadata(test.text)
+    #print test.get_metadata(test.text)
     no_meta = test.remove_metadata(test.text)
-    print no_meta
-    #print test.remove_chapters(no_meta)
-    #cleaned = test.remove_punctuation(no_meta)
+    #print no_meta
+    #print test.get_all_chapters(no_meta)
+    print test.remove_chapters(no_meta)
+    #print test.remove_punctuation(no_meta)
     #print test.whole_text_words(cleaned)
     #print test.text_letters(cleaned)
