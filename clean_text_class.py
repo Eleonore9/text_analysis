@@ -13,22 +13,21 @@ class clean_text:
     def store_metadata(self, text):
         ''' Build a dictionary with metadata from
         the top of the text file'''
-        text_file = open(text, 'r')
-        meta =  text_file.read(590)
-        title, author, language = "", "", ""
-        try:
-            t = re.search("Title: [A-Za-z'\t' .]+", meta)
-            a = re.search("Author: [A-Za-z'\t' .]+", meta)
-            l = re.search("Language: [A-Za-z'\t' .]+", meta)
-            title += t.group(0)
-            author += a.group(0)
-            language += l.group(0)
-        except:
-            print "No metadata found!"
-        metadata = {"title": title.replace("Title: ", ""),
-                    "author": author.replace("Author: ", ""),
-                    "language": language.replace("Language: ", "")}
-        text_file.close()
+        with open(text, 'r') as text_file:
+            meta =  text_file.read(590)
+            title, author, language = "", "", ""
+            try:
+                t = re.search("Title: [A-Za-z'\t' .]+", meta)
+                a = re.search("Author: [A-Za-z'\t' .]+", meta)
+                l = re.search("Language: [A-Za-z'\t' .]+", meta)
+                title += t.group(0)
+                author += a.group(0)
+                language += l.group(0)
+            except:
+                print "No metadata found!"
+            metadata = {"title": title.replace("Title: ", ""),
+                        "author": author.replace("Author: ", ""),
+                        "language": language.replace("Language: ", "")}
         return metadata
 
         ## Helpers to actually clean the whole text:
@@ -36,10 +35,9 @@ class clean_text:
     def remove_metadata(self, text):
         ''' Returns the text as a string
         without the metadata at the top.'''
-        text_file = open(text, 'r')
-        text_file.read(683)
-        clean_text = text_file.read().strip().lower()
-        text_file.close()
+        with open(text, 'r') as text_file:
+            text_file.read(683)
+            clean_text = text_file.read().strip().lower()
         return clean_text
         
     def remove_chapters(self, text_str):
@@ -71,8 +69,8 @@ if __name__ == "__main__":
     test = clean_text('books/test2.txt')
     #print test.store_metadata(test.text)
     no_meta = test.remove_metadata(test.text)
-    #print no_meta
-    print test.remove_chapters(no_meta)
+    print no_meta
+    #print test.remove_chapters(no_meta)
     #cleaned = test.remove_punctuation(no_meta)
     #print test.whole_text_words(cleaned)
     #print test.text_letters(cleaned)
