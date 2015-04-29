@@ -49,7 +49,10 @@ class clean_text:
     ## Get one chapter from a text
     def get_chapter(self, text, chapter):
         ''' Returns the text for a chapter specified.'''
-        pass
+        # Use regex to retrieve the text between
+        # the chapter specified and the next chapter
+        chapter_text = re.g(r"^(%s) (chapter \w+.)$" % chapter, text)
+        return chapter_text
     
     ## Remove "Chapter x":    
     def remove_chapters(self, text_str):
@@ -81,7 +84,8 @@ if __name__ == "__main__":
     #print test.get_metadata(test.text)
     no_meta = test.remove_metadata(test.text)
     #print no_meta
-    print test.get_all_chapters(no_meta)
+    #print test.get_all_chapters(no_meta)
+    print test.get_chapter(no_meta, 'chapter i')
     #print test.remove_chapters(no_meta)
     #print test.remove_punctuation(no_meta)
     #print test.whole_text_words(cleaned)
