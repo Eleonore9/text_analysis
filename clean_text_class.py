@@ -24,7 +24,7 @@ class clean_text:
                 author += a.group(0)
                 language += l.group(0)
             except:
-                print "No metadata found!"
+                print("No metadata found!")
             metadata = {"title": title.replace("Title: ", ""),
                         "author": author.replace("Author: ", ""),
                         "language": language.replace("Language: ", "")}
@@ -53,8 +53,8 @@ class clean_text:
         # the chapter specified and the next chapter
         chapter_text = re.g(r"^(%s) (chapter \w+.)$" % chapter, text)
         return chapter_text
-    
-    ## Remove "Chapter x":    
+
+    ## Remove "Chapter x":
     def remove_chapters(self, text_str):
         ''' Returns the whole text as a string
         without "Chapter x".'''
@@ -63,7 +63,7 @@ class clean_text:
 
     ## Get rid of the punctuation:
     def remove_punctuation(self, text_str):
-        """Returns a string without 
+        """Returns a string without
         punctuation"""
         clean_text = re.sub(r"[,\.\(\)_\*:?!']", "", text_str)
         return clean_text
@@ -72,7 +72,7 @@ class clean_text:
     def whole_text_words(self, text_cleaned):
         list_words = text_cleaned.split()
         return list_words
-    
+
     # Add a function to return a string of letters
     def text_letters(self, text_cleaned):
         list_letters = [l for l in text_cleaned if l not in ['\n', ' ']]
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     no_meta = test.remove_metadata(test.text)
     #print no_meta
     #print test.get_all_chapters(no_meta)
-    print test.get_chapter(no_meta, 'chapter i')
+    print(test.get_chapter(no_meta, 'chapter i'))
     #print test.remove_chapters(no_meta)
     #print test.remove_punctuation(no_meta)
     #print test.whole_text_words(cleaned)
