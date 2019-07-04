@@ -17,8 +17,10 @@ Python class to perform the cleaning of Gutenberg books.
   1. Script to get counts and frequencies.
   2. Using Pandas in a Jupyter notebook to analyse and visualise letters frequencies in three books (English language):
   ![img_bar_plot](https://raw.github.com/Eleonore9/text_analysis/master/imgs/letters_freqs.png)
-  3. Still using Pandas in a notebook to compare letters frequencies in Englissh books versus French books:
+  3. Still using Pandas in a notebook to compare letters frequencies in English books versus French books:
   ![en_vs_fr](https://raw.github.com/Eleonore9/text_analysis/master/imgs/en_vs_fr.png)
+  4. Using Processing.js (p5.js) visualise the letters frequencies for English and French (output of the Pandas analysis)
+  ![p5js viz](https://raw.github.com/Eleonore9/text_analysis/master/imgs/abc-viz-en-fr.png)
 
 * Words: basic script for counts and frequencies. On hold until the part on
 "Letters" is over.
